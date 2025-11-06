@@ -1,0 +1,15 @@
+services:
+  postgresql:
+    image: postgres:15
+    container_name: system-postgresql
+    restart: unless-stopped
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - TZ=${TZ}
+    ports:
+      - 5432:5432
+    volumes:
+      - ${VOLUME_DATA_PATH}:/var/lib/postgresql/data
+      - ${VOLUME_CONF_PATH}:/etc/postgresql/conf.d
+      - ${VOLUME_TIME_PATH}:/etc/localtime:ro
